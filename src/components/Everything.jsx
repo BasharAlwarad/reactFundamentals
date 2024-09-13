@@ -1,6 +1,6 @@
 export const Navigation = () => {
   return (
-    <nav>
+    <nav className="navigation">
       <ul>
         <li>
           <a href="#hero">Home</a>
@@ -18,8 +18,14 @@ export const Navigation = () => {
 
 export const Header = () => {
   return (
-    <header>
-      <h1>My Website</h1>
+    <header
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+      }}
+    >
+      <h1 style={{ color: 'blue' }}>My Website</h1>
       <Navigation />
     </header>
   );
@@ -27,7 +33,7 @@ export const Header = () => {
 
 export const Hero = () => {
   return (
-    <section>
+    <section className="hero">
       <h2>Welcome to Our Website!</h2>
       <p>This is the hero section with some introductory text.</p>
     </section>
@@ -36,7 +42,7 @@ export const Hero = () => {
 
 export const Services = () => {
   return (
-    <section>
+    <section className="services">
       <h2>Our Services</h2>
       <p>We offer a variety of services to meet your needs.</p>
     </section>
@@ -45,7 +51,7 @@ export const Services = () => {
 
 export const Footer = () => {
   return (
-    <footer>
+    <footer className="footer">
       <p>&copy; 2024 My Website. All rights reserved.</p>
     </footer>
   );
