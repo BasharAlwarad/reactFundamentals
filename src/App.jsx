@@ -1,29 +1,54 @@
 import { useState } from 'react';
-import Button from './components/Button';
-import Name from './components/Name';
 
 function App() {
-  //      var   reset value         default value
-  const [name, setName] = useState('bashar');
+  const [form, setForm] = useState({
+    name: '',
+    email: '',
+    telephone: '',
+    message: '',
+  });
 
-  const [number, setNumber] = useState(1);
-
-  const add = () => {
-    setNumber((x) => x + 1);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, telephone, message } = e.target;
+    setForm({
+      ...form,
+      name: name.value,
+      email: email.value,
+      telephone: telephone.value,
+      message: message.value,
+    });
   };
 
   return (
     <div>
-      <Button title={'change name'} setName={setName} />
-      <br />
-      <Name name={name} />
-      <br />
-      <button onClick={add}>add</button>
-      <button onClick={() => setNumber((x) => x - 1)}>sub</button>
-      <br />
-      {number}
-      <br />
-      <br />
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <input type="text" name="name" />
+        </div>
+
+        <div>
+          <label>Email:</label>
+          <input type="email" name="email" />
+        </div>
+
+        <div>
+          <label>Telephone:</label>
+          <input type="tel" name="telephone" />
+        </div>
+
+        <div>
+          <label>Message:</label>
+          <textarea name="message" />
+        </div>
+
+        <button type="submit">Submit</button>
+      </form>
+      <p>{form.name} </p>
+      <p>{form.email} </p>
+      <p>{form.telephone} </p>
+      <p>{form.message} </p>
     </div>
   );
 }
