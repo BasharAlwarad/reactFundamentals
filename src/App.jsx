@@ -20,27 +20,36 @@ function App() {
     });
   };
 
+  const handelChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
-          <input type="text" name="name" />
+          <input type="text" name="name" onChange={handelChange} />
         </div>
 
         <div>
           <label>Email:</label>
-          <input type="email" name="email" />
+          <input type="email" name="email" onChange={handelChange} />
         </div>
 
         <div>
           <label>Telephone:</label>
-          <input type="tel" name="telephone" />
+          <input type="tel" name="telephone" onChange={handelChange} />
         </div>
 
         <div>
           <label>Message:</label>
-          <textarea name="message" />
+          <textarea name="message" onChange={handelChange} />
         </div>
 
         <button type="submit">Submit</button>
