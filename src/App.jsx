@@ -1,54 +1,44 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-function App() {
-  const [data, setData] = useState([]);
-  const [num, setNum] = useState(1);
-  const [num2, setNum2] = useState(0);
-
-  const add = () => setNum(num + 1);
-  const sub = () => setNum(num - 1);
-  const add2 = () => setNum2(num2 + 1);
-  const sub2 = () => setNum2(num2 - 1);
+const Candle = () => {
+  const [candleHeight, setCandleHeight] = useState(100);
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${num}`)
-      .then((response) => response.json())
-      .then((json) => setData(json));
-    console.log('I am from useEffect!');
-  }, [num]);
-
-  useEffect(() => {
-    const x = setInterval(() => {
-      console.log('Hello john');
-    }, 1000);
-
-    return () => {
-      clearInterval(x);
-    };
-  }, []);
-
-  useEffect(() => {
-    const x = setTimeout(() => {
-      console.log('Hello im a setTimeout how are you today adfasdfasdf');
-    }, 1000);
-    return () => {
-      clearTimeout(x);
-    };
-  }, []);
+    const timer = setInterval(
+      () =>
+        setCandleHeight((prev) => {
+          if (prev === 10) return 90;
+          return prev - 10;
+        }),
+      2000
+    );
+    return () => clearInterval(timer);
+  });
 
   return (
-    <div>
-      <button onClick={add}>Add</button>
-      <button onClick={sub}>Sub</button>
-      <p>{num} </p>
-      <br />
-      <button onClick={add2}>Add</button>
-      <button onClick={sub2}>Sub</button>
-      <p>{num2} </p>
-      <br />
-      <p>{data.title}</p>
+    <div className="exercise">
+      {/* <div>
+        <button>Make candle smaller</button>
+      </div> */}
+      <div className="candleContainer" style={{ height: `${candleHeight}%` }}>
+        {/* <div className="candleContainer" style={{ height: `${candleHeight}%` }}> */}
+        <div className="candle">
+          <div className="flame">
+            <div className="shadows" />
+            <div className="top" />
+            <div className="middle" />
+            <div className="bottom" />
+          </div>
+          <div className="wick" />
+          <div className="wax" />
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+const App = () => {
+  return <Candle />;
+};
 
 export default App;
