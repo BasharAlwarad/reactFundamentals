@@ -1,6 +1,9 @@
 import { useState } from 'react';
 
 function App() {
+  const [x, setX] = useState(false);
+  x && console.log('x is true');
+
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -31,7 +34,9 @@ function App() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <button onClick={() => setX(!x)}>Toggle x</button>
+      <h1> {x ? 'x is true' : 'x is false'} </h1>
+      <form onSubmit={handleSubmit} className={x ? 'light' : 'dark'}>
         <div>
           <label>Name:</label>
           <input type="text" name="name" onChange={handelChange} />
