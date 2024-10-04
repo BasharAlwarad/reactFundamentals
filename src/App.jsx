@@ -4,15 +4,18 @@ import OutCome from './component/OutCome';
 import User from './component/User';
 
 import { UserProvider } from './context/userContext';
+import { TodosProvider } from './context/todosContext';
 
 function App() {
   return (
     <div>
       <UserProvider>
-        <OutCome />
-        <InButton />
-        <DeButton />
-        <User />
+        <TodosProvider>
+          <OutCome />
+          <InButton />
+          <DeButton />
+          <User />
+        </TodosProvider>
       </UserProvider>
     </div>
   );

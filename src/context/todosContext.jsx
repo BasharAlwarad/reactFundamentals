@@ -1,28 +1,34 @@
 import { useState, useEffect, useContext, createContext } from 'react';
 
-const todosContext = createContext();
+const todoContext = createContext();
 
 export const TodosProvider = ({ children }) => {
   const [todo, setTodo] = useState({ todo: 'something to do', id: 1 });
 
-  const getUser = () => {
+  const getTodo = () => {
     fetch(`https://jsonplaceholder.typicode.com/todos/1`)
       .then((response) => response.json())
-      .then((json) => setTodo(json));
+      .then((json) => setTodo(json))
+      .catch((error) => console.error('Error fetching todo:', error));
   };
 
   useEffect(() => {
-    getUser();
+    getTodo();
   }, []);
 
   return (
-    <todosContext.Provider value={{ todo, setTodo }}>
+    <todoContext.Provider value={{ todo, setTodo }}>
       {children}
-    </todosContext.Provider>
+    </todoContext.Provider>
   );
 };
 
 export const useTodo = () => {
-  const { todo, setTodo } = useContext(todosContext);
-  return { todo, setTodo };
+  const context = useContext(todoContext);
+
+  if (!context) {
+    throw new Error('useTodo must be used within a TodosProvider');
+  }
+
+  return context;
 };

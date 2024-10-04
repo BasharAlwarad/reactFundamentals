@@ -1,15 +1,14 @@
 import { useUser } from '../context/userContext';
 import { useTodo } from '../context/todosContext';
 
-// const UserName = ({ user }) => {
 const UserName = () => {
-  const { user } = useUser();
+  const { user, count } = useUser();
   const { todo } = useTodo();
 
   return (
     <p>
-      {user?.name}
-      <br />
+      {user?.name} <br />
+      {count}
       {todo?.title}
     </p>
   );
