@@ -28,30 +28,36 @@ const TodoItem = ({ todo }) => {
   return (
     <li
       key={todo.id}
-      className="flex flex-row border-2 border-black p-2 m-2 rounded-md justify-between align-middle"
+      className="flex items-center justify-between bg-base-100 shadow-md p-4 rounded-lg mb-2"
     >
       <div className="flex items-center">
-        <p className="mr-2">{todo.text}</p>
+        <p
+          className={`mr-2 ${
+            todo.completed ? 'line-through text-gray-500' : ''
+          }`}
+        >
+          {todo.text}
+        </p>
       </div>
-      <div className="flex items-center">
-        {todo.completed ? (
+      <div className="flex items-center space-x-2">
+        <label className="swap swap-flip text-3xl">
+          <input type="checkbox" />
           <FaCheckCircle
             onClick={() => toggleTodoCompletion(todo)}
-            className="text-green-500 cursor-pointer mx-2"
+            className="swap-on text-green-500"
             title="Mark as Incomplete"
             size={20}
           />
-        ) : (
           <FaTimesCircle
             onClick={() => toggleTodoCompletion(todo)}
-            className="text-red-500 cursor-pointer mx-2"
+            className="swap-off text-red-500"
             title="Mark as Complete"
             size={20}
           />
-        )}
+        </label>
         <FaEdit
           onClick={() => updateTodo(todo)}
-          className="text-blue-500 cursor-pointer mx-2"
+          className="text-blue-500 cursor-pointer"
           title="Edit"
           size={20}
         />
