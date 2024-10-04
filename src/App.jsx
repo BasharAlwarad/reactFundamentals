@@ -1,24 +1,16 @@
-import DeButton from './component/DeButton';
-import InButton from './component/InButton';
-import OutCome from './component/OutCome';
-import User from './component/User';
-
-import { UserProvider } from './context/userContext';
 import { TodosProvider } from './context/todosContext';
+import { AddTodo, TodosList } from '@/components';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <UserProvider>
-        <TodosProvider>
-          <OutCome />
-          <InButton />
-          <DeButton />
-          <User />
-        </TodosProvider>
-      </UserProvider>
-    </div>
+    <TodosProvider>
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4">Todo List</h1>
+        <AddTodo />
+        <TodosList />
+      </div>
+    </TodosProvider>
   );
-}
+};
 
 export default App;

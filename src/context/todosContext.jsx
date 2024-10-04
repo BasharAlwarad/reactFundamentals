@@ -1,23 +1,28 @@
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useState, useContext, createContext, useEffect } from 'react';
 
 const todoContext = createContext();
 
 export const TodosProvider = ({ children }) => {
-  const [todo, setTodo] = useState({ todo: 'something to do', id: 1 });
-
-  const getTodo = () => {
-    fetch(`https://jsonplaceholder.typicode.com/todos/1`)
-      .then((response) => response.json())
-      .then((json) => setTodo(json))
-      .catch((error) => console.error('Error fetching todo:', error));
+  const getInitialTodos = () => {
+    const storedTodos = localStorage.getItem('todos');
+    return storedTodos
+      ? JSON.parse(storedTodos)
+      : [
+          { id: 1, text: 'Learn React', completed: true },
+          { id: 2, text: 'Go shopping', completed: false },
+          { id: 3, text: 'Write code', completed: false },
+          { id: 4, text: 'Read a book', completed: true },
+        ];
   };
 
+  const [todos, setTodos] = useState(getInitialTodos);
+
   useEffect(() => {
-    getTodo();
-  }, []);
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   return (
-    <todoContext.Provider value={{ todo, setTodo }}>
+    <todoContext.Provider value={{ todos, setTodos }}>
       {children}
     </todoContext.Provider>
   );
