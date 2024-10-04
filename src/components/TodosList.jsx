@@ -2,12 +2,12 @@ import { useTodo } from '../context/todosContext';
 import TodoItem from './TodoItem';
 
 const TodosList = () => {
-  const { todos, setTodos } = useTodo();
+  const { todos } = useTodo();
 
   return (
     <ul>
       {todos.map((todo) => (
-        <TodoItem todo={todo} key={todo.id} setTodos={setTodos} />
+        <TodoItem todo={todo} key={todo.id} />
       ))}
     </ul>
   );
