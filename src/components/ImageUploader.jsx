@@ -1,9 +1,21 @@
 import { useState } from 'react';
 
 function ImageUploader() {
-  const [base64Image, setBase64Image] = useState(
-    () => localStorage.getItem('uploadedImage') || ''
-  );
+  const [base64Image, setBase64Image] = useState(() => {
+    const savedImage = localStorage.getItem('uploadedImage');
+    const expiration = localStorage.getItem('uploadedImageExpiration');
+
+    if (savedImage && expiration) {
+      const now = new Date().getTime();
+      if (now < parseInt(expiration)) {
+        return savedImage;
+      } else {
+        localStorage.removeItem('uploadedImage');
+        localStorage.removeItem('uploadedImageExpiration');
+      }
+    }
+    return '';
+  });
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -13,6 +25,9 @@ function ImageUploader() {
         const base64String = reader.result;
         setBase64Image(base64String);
         localStorage.setItem('uploadedImage', base64String);
+
+        const expirationTime = new Date().getTime() + 1000 * 10;
+        localStorage.setItem('uploadedImageExpiration', expirationTime);
       };
       reader.readAsDataURL(file);
     }
