@@ -34,16 +34,23 @@ function ImageUploader() {
   };
 
   return (
-    <div>
-      <h2>Upload and Save Image as Base64</h2>
-      <input type="file" accept="image/*" onChange={handleImageUpload} />
+    <div className="flex flex-col items-center min-h-screen p-4 bg-base-200">
+      <h2 className="mb-4 text-2xl font-bold">
+        Upload and Save Image as Base64
+      </h2>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageUpload}
+        className="w-full max-w-xs file-input file-input-bordered file-input-primary"
+      />
       {base64Image && (
-        <div>
-          <h3>Base64 Image Preview:</h3>
+        <div className="mt-4">
+          <h3 className="mb-2 text-lg font-medium">Base64 Image Preview:</h3>
           <img
             src={base64Image}
             alt="Uploaded Preview"
-            style={{ width: '200px' }}
+            className="w-48 rounded-lg shadow-lg"
           />
         </div>
       )}
