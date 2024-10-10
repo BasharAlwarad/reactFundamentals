@@ -1,5 +1,11 @@
+import { ImageUploader } from '@/components';
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <ImageUploader />
+    </>
+  );
 }
 
 export default App;
