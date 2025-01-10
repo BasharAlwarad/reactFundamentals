@@ -8,7 +8,10 @@ export const TodosProvider = ({ children }) => {
   const getTodo = () => {
     fetch(`https://jsonplaceholder.typicode.com/todos/1`)
       .then((response) => response.json())
-      .then((json) => setTodo(json))
+      .then((json) => {
+        console.log(json);
+        setTodo(json);
+      })
       .catch((error) => console.error('Error fetching todo:', error));
   };
 
